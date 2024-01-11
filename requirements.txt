@@ -1,2 +1,3 @@
 dashscope
+sympy
 git+https://gitee.com/lllcho/segment-anything.git
