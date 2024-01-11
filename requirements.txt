@@ -9,4 +9,5 @@ easydict
 scikit-image
 git+https://github.com/facebookresearch/segment-anything.git
 torch
+torchvision
 oss2==2.17.0
