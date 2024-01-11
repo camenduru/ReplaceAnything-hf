@@ -116,36 +116,36 @@ with block:
                             <a href='https://github.com/AIGCDesignGroup/ReplaceAnything'><img src='https://img.shields.io/badge/Github-Repo-blue'></a>
                         </div>
                         </br>
-                        <h3> 我们发现，在严格保持某个“物体ID”不变的情况下生成新的内容有着很大的市场需求，同时也是具有挑战性的。为此，我们提出了ReplaceAnything框架。它可以用于很多场景，比如<b>人体替换、服装替换、物体替换以及背景替换</b>等等。</h3>
-                        <h5 style="margin: 0; color: red">如果你认为该项目有所帮助的话，不妨给我们Github点个Star以便获取最新的项目进展.</h5>
+                        <h3>OffendingAIGC techniques have attracted lots of attention recently. They have demonstrated strong capabilities in the areas of image editing, image generation and so on. We find that generating new contents while strictly keeping the identity of use-specified object unchanged is of great demand, yet challenging. To this end, we propose ReplaceAnything framework. It can be used in many scenes, such as human replacement, clothing replacement, background replacement, and so on.</h3>
+                        <h5 style="margin: 0; color: red">If you found the project helpful, you can click a Star on Github to get the latest updates on the project.</h5>
                         </br>
                     </div>
             """)
 
     with gr.Tabs(elem_classes=["Tab"]):
-        with gr.TabItem("作品广场"):
+        with gr.TabItem("作品广场(Image Gallery)"):
             gr.Gallery(value=showcases,
                         height=800,
                         columns=4,
                         object_fit="scale-down"
                         )
-        with gr.TabItem("创作图像"):  
-            with gr.Accordion(label="🧭 操作指南:", open=True, elem_id="accordion"):
+        with gr.TabItem("创作图像(Image Create)"):  
+            with gr.Accordion(label="🧭 操作指南(Instructions):", open=True, elem_id="accordion"):
                 with gr.Row(equal_height=True):
                     with gr.Row(elem_id="ShowCase"):
                             gr.Image(value="showcase/ra.gif")
                     gr.Markdown("""
-                    - ⭐️ <b>step1：</b>在“输入图像”中上传or选择Example里面的一张图片
-                    - ⭐️ <b>step2：</b>通过点击鼠标选择图像中希望保留的物体
-                    - ⭐️ <b>step3：</b>输入对应的参数，例如prompt等，点击Run进行生成
-                    - ⭐️ <b>step4 (可选)：</b>此外支持换背景操作，上传目标风格背景，执行完step3后点击Run进行生成
+                    - ⭐️ <b>step1：</b>在“输入图像”中上传or选择Example里面的一张图片(Upload or select one image from Example)
+                    - ⭐️ <b>step2：</b>通过点击鼠标选择图像中希望保留的物体(Click to select the object)
+                    - ⭐️ <b>step3：</b>输入对应的参数，例如prompt等，点击Run进行生成(Input prompt or reference image)
+                    - ⭐️ <b>step4 (可选)：</b>此外支持换背景操作，上传目标风格背景，执行完step3后点击Run进行生成(Click Run button)
                     """)                          
             with gr.Row():
                 with gr.Column():
                     with gr.Column(elem_id="Input"):
                         with gr.Row():
                             with gr.Tabs(elem_classes=["feedback"]):
-                                with gr.TabItem("输入图像"):
+                                with gr.TabItem("输入图像(Input Image)"):
                                     input_image = gr.Image(type="numpy", label="输入图",scale=2)
                         original_image = gr.State(value=None,label="索引")
                         original_mask = gr.State(value=None)
