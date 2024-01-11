@@ -35,14 +35,14 @@ markers = [1, 5]
 # - - - - - examples  - - - - -  #
 # 输入图地址, 文本, 背景图地址, index, []
 image_examples = [
-                            ["imgs/000.jpg", "一位年轻女性身穿短袖，展示一台手机", None, 0, []],
-                            ["imgs/001.jpg", "一位年轻女性身穿短袖，手持杯子", None, 1, []],
-                            ["imgs/003.png", "一名女子身穿黑色西服，背景蓝色", "imgs/003_bg.jpg", 2, []],
-                            ["imgs/002.png", "一名年轻女性身穿裙子摆拍，背景是蓝色的", "imgs/002_bg.png", 3, []],
-                            ["imgs/bg_gen/base_imgs/1cdb9b1e6daea6a1b85236595d3e43d6.png", "水滴飞溅", None, 4, []],
+                            ["imgs/000.jpg", "A young woman in short sleeves shows off a mobile phone", None, 0, []],
+                            ["imgs/001.jpg", "A young woman wears short sleeves, her hand is holding a bottle.", None, 1, []],
+                            ["imgs/003.png", "A woman is wearing a black suit against a blue background", "imgs/003_bg.jpg", 2, []],
+                            ["imgs/002.png", "A young woman poses in a dress, she stands in front of a blue background", "imgs/002_bg.png", 3, []],
+                            ["imgs/bg_gen/base_imgs/1cdb9b1e6daea6a1b85236595d3e43d6.png", "water splash", None, 4, []],
                             ["imgs/bg_gen/base_imgs/1cdb9b1e6daea6a1b85236595d3e43d6.png", "", "imgs/bg_gen/ref_imgs/df9a93ac2bca12696a9166182c4bf02ad9679aa5.jpg", 5, []],
-                            ["imgs/bg_gen/base_imgs/IMG_2941.png", "在沙漠地面上", None, 6, []],
-                            ["imgs/bg_gen/base_imgs/b2b1ed243364473e49d2e478e4f24413.png","白色地面，白色背景，光线射入，佳能",None,7,[]],
+                            ["imgs/bg_gen/base_imgs/IMG_2941.png", "On the desert floor", None, 6, []],
+                            ["imgs/bg_gen/base_imgs/b2b1ed243364473e49d2e478e4f24413.png","White ground, white background, light coming in, Canon",None,7,[]],
                         ]
 
 img = "image_gallery/"
