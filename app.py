@@ -297,4 +297,4 @@ with block:
     run_button.click(fn=process, inputs=ips, outputs=[result_gallery, request_id, gallery_flag])
 
 
-block.launch(server_name='0.0.0.0', share=False, server_port=7687)
+block.launch(share=True)
