@@ -132,12 +132,10 @@ with block:
         with gr.TabItem("创作图像(Image Create)"):  
             with gr.Accordion(label="🧭 操作指南(Instructions):", open=True, elem_id="accordion"):
                 with gr.Row(equal_height=True):
-                    with gr.Row(elem_id="ShowCase"):
-                            gr.Image(value="showcase/ra.gif")
                     gr.Markdown("""
                     - ⭐️ <b>step1：</b>在“输入图像”中上传or选择Example里面的一张图片(Upload or select one image from Example)
-                    - ⭐️ <b>step2：</b>通过点击鼠标选择图像中希望保留的物体(Click to select the object)
-                    - ⭐️ <b>step3：</b>输入对应的参数，例如prompt等，点击Run进行生成(Input prompt or reference image)
+                    - ⭐️ <b>step2：</b>通过点击鼠标选择图像中希望保留的物体(Click on Input-image to select the object to be retained)
+                    - ⭐️ <b>step3：</b>输入对应的参数，例如prompt等，点击Run进行生成(Input prompt or reference image for generating new contents)
                     - ⭐️ <b>step4 (可选)：</b>此外支持换背景操作，上传目标风格背景，执行完step3后点击Run进行生成(Click Run button)
                     """)                          
             with gr.Row():
