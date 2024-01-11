@@ -7,4 +7,4 @@ omegaconf
 sentencepiece
 easydict
 scikit-image
-git+https://gitee.com/lllcho/segment-anything.git
+git+https://github.com/facebookresearch/segment-anything.git
