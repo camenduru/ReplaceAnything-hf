@@ -123,49 +123,49 @@ with block:
             """)
 
     with gr.Tabs(elem_classes=["Tab"]):
-        with gr.TabItem("作品广场(Image Gallery)"):
+        with gr.TabItem("Image Gallery"):
             gr.Gallery(value=showcases,
                         height=800,
                         columns=4,
                         object_fit="scale-down"
                         )
-        with gr.TabItem("创作图像(Image Create)"):  
-            with gr.Accordion(label="🧭 操作指南(Instructions):", open=True, elem_id="accordion"):
+        with gr.TabItem("Image Create"):  
+            with gr.Accordion(label="🧭 Instructions:", open=True, elem_id="accordion"):
                 with gr.Row(equal_height=True):
                     gr.Markdown("""
-                    - ⭐️ <b>step1：</b>在“输入图像”中上传or选择Example里面的一张图片(Upload or select one image from Example)
-                    - ⭐️ <b>step2：</b>通过点击鼠标选择图像中希望保留的物体(Click on Input-image to select the object to be retained)
-                    - ⭐️ <b>step3：</b>输入对应的参数，例如prompt等，点击Run进行生成(Input prompt or reference image for generating new contents)
-                    - ⭐️ <b>step4 (optional)：</b>此外支持换背景操作，上传目标风格背景，执行完step3后点击Run进行生成(Click Run button)
+                    - ⭐️ <b>step1：</b>Upload or select one image from Example
+                    - ⭐️ <b>step2：</b>Click on Input-image to select the object to be retained
+                    - ⭐️ <b>step3：</b>Input prompt or reference image (highly-recommended) for generating new contents
+                    - ⭐️ <b>step4：</b>Click Run button
                     """)                          
             with gr.Row():
                 with gr.Column():
                     with gr.Column(elem_id="Input"):
                         with gr.Row():
                             with gr.Tabs(elem_classes=["feedback"]):
-                                with gr.TabItem("输入图像(Input Image)"):
-                                    input_image = gr.Image(type="numpy", label="输入图",scale=2)
-                        original_image = gr.State(value=None,label="索引")
+                                with gr.TabItem("Input Image"):
+                                    input_image = gr.Image(type="numpy", label="input",scale=2)
+                        original_image = gr.State(value=None,label="index")
                         original_mask = gr.State(value=None)
-                        selected_points = gr.State([],label="点选坐标")
+                        selected_points = gr.State([],label="click points")
                         with gr.Row(elem_id="Seg"):
-                            radio = gr.Radio(['前景点选', '背景点选'], label='分割点选: ', value='前景点选',scale=2)
-                            undo_button = gr.Button('撤销点选至上一步', elem_id="btnSEG",scale=1)
-                    prompt = gr.Textbox(label="Prompt (支持中英文)", placeholder="请输入期望的文本描述",value='',lines=1)
-                    run_button = gr.Button("生成图像（Run）",elem_id="btn")
+                            radio = gr.Radio(['foreground', 'background'], label='Click to seg: ', value='foreground',scale=2)
+                            undo_button = gr.Button('Undo seg', elem_id="btnSEG",scale=1)
+                    prompt = gr.Textbox(label="Prompt", placeholder="Please input your prompt",value='',lines=1)
+                    run_button = gr.Button("Run",elem_id="btn")
                     
-                    with gr.Accordion("更多输入参数 (推荐使用)", open=False, elem_id="accordion1"):
+                    with gr.Accordion("More input params (highly-recommended)", open=False, elem_id="accordion1"):
                         with gr.Row(elem_id="Image"):
                             with gr.Tabs(elem_classes=["feedback1"]):
-                                with gr.TabItem("风格背景图输入(可选项)"):
-                                    source_background = gr.Image(type="numpy", label="背景图")
+                                with gr.TabItem("Reference Image (Optional)"):
+                                    source_background = gr.Image(type="numpy", label="Background Image")
                     
-                        face_prompt = gr.Textbox(label="人脸 Prompt (支持中英文)", value='good face, beautiful face, best quality')
+                        face_prompt = gr.Textbox(label="Face Prompt", value='good face, beautiful face, best quality')
                 with gr.Column():
                     with gr.Tabs(elem_classes=["feedback"]):
-                        with gr.TabItem("输出结果"):
+                        with gr.TabItem("Outputs"):
                             result_gallery = gr.Gallery(label='Output', show_label=False, elem_id="gallery", preview=True)
-                            recommend=gr.Button("推荐至作品广场",elem_id="recBut")
+                            recommend=gr.Button("Recommend results to Image Gallery",elem_id="recBut")
                             request_id=gr.State(value="")
                             gallery_flag=gr.State(value=False)
             with gr.Row():
@@ -173,7 +173,7 @@ with block:
                     def process_example(input_image, prompt, source_background, original_image, selected_points):
                         return input_image, prompt, source_background, original_image, []
                     example = gr.Examples(
-                        label="输入图示例",
+                        label="Input Example",
                         examples=image_examples,
                         inputs=[input_image, prompt, source_background, original_image, selected_points],
                         outputs=[input_image, prompt, source_background, original_image, selected_points],
@@ -224,9 +224,9 @@ with block:
         return masked_img, output_mask
     
     def get_point(img, sel_pix, point_type, evt: gr.SelectData):
-        if point_type == '前景点选':
+        if point_type == 'foreground':
             sel_pix.append((evt.index, 1))   # append the foreground_point
-        elif point_type == '背景点选':
+        elif point_type == 'background':
             sel_pix.append((evt.index, 0))    # append the background_point
         else:
             sel_pix.append((evt.index, 1))    # default foreground_point
@@ -262,7 +262,7 @@ with block:
                 temp, output_mask = segmentation(temp, sel_pix)
             return temp.astype(np.uint8), output_mask
         else:
-            gr.Error("暂无“上一步”可撤销")
+            gr.Error("Nothing to Undo")
     
     undo_button.click(
         undo_points,
@@ -272,6 +272,7 @@ with block:
 
     def upload_to_img_gallery(img, res, re_id, flag):
         if flag:
+            gr.Info("Image uploading")
             if isinstance(img, int):
                 image_name = image_examples[img][0]
                 img = cv2.imread(image_name)
@@ -282,9 +283,9 @@ with block:
                 r = cv2.cvtColor(r, cv2.COLOR_BGR2RGB)
                 _ = upload_np_2_oss(r, name=re_id+f"_res_{idx}.jpg", gallery=True)
             flag=False
-            gr.Info("图片已经被上传完毕，待审核")
+            gr.Info("Images have beend uploaded and are under check")
         else:
-            gr.Info("暂无图片可推荐，或者已经推荐过一次了")
+            gr.Info("Nothing to to")
         return flag
 
     recommend.click(
