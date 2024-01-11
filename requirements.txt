@@ -1,3 +1,10 @@
 dashscope
 sympy
+Pillow==9.5.0
+gradio==3.50.0
+opencv-python
+omegaconf
+sentencepiece
+easydict
+scikit-image
 git+https://gitee.com/lllcho/segment-anything.git
