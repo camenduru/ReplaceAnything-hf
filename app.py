@@ -55,7 +55,7 @@ for idx, name in enumerate(files):
 
 def process(input_image, original_image, original_mask, selected_points, source_background, prompt, face_prompt):
     if original_image is None or original_mask is None or len(selected_points)==0:
-        raise gr.Error('请上传输入图片并通过点击鼠标选择需要保留的物体.')
+        raise gr.Error('Please upload the input image and select the object you want to keep by clicking the mouse.')
     
     # load example image
     if isinstance(original_image, int):
@@ -76,7 +76,7 @@ def process(input_image, original_image, original_mask, selected_points, source_
     res = []
     if len(det_res)>0:
         if len(prompt)==0:
-            raise gr.Error('请输入prompt')
+            raise gr.Error('Please input the prompt')
         res = call_virtualmodel(input_image_url, input_mask_url, source_background_url, prompt, face_prompt)
     else:
         ### 这里接入主图背景生成
